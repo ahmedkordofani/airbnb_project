@@ -9,6 +9,8 @@ elif os.environ.get('APP_ENV') == 'test':
 
 
 # define our models
+
+# User model
 class User(peewee.Model):
 
     # fields
@@ -21,6 +23,7 @@ class User(peewee.Model):
         table_name = 'users'
     
 
+# Listing model
 class Listing(peewee.Model):
 
     # fields
@@ -37,6 +40,7 @@ class Listing(peewee.Model):
         table_name = 'listings'
 
 
+# Booking model
 class Booking(peewee.Model):
 
     # fields
