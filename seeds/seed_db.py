@@ -1,4 +1,5 @@
 from lib.models import *
+from hashlib import sha256
 
 
 def seed_database():
@@ -11,8 +12,8 @@ def seed_database():
     create_db_tables()
 
     # create test users
-    User.create(email='jdoe@gmail.com', password='jdoepassword')
-    User.create(email='kmoor@outlook.com', password='kmoorpassword')
+    User.create(email='jdoe@gmail.com', password=sha256('jdoepassword'.encode()).hexdigest())
+    User.create(email='kmoor@outlook.com', password=sha256('kmoorpassword'.encode()).hexdigest())
 
     # create test listings
     Listing.create(title='My House', description='A nice house', price=100, start_date='2023-11-24', end_date='2023-12-01', owner=1)
