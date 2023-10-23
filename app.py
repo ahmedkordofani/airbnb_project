@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, render_template
+from lib.models import *
 
 # Create a new Flask app
 app = Flask(__name__)
