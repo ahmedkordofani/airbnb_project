@@ -4,6 +4,7 @@ from lib.models import *
 
 # Create a new Flask app
 app = Flask(__name__)
+create_db_tables()
 
 # == Your Routes Here ==
 
