@@ -20,17 +20,16 @@ Everyone in the team should then clone this fork to their local machine to work 
 # If you have problems with the above, contact your coach
 
 # Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_TEST
+; createdb airbnb-dev
 
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
+# create .env file
+; echo "export APP_ENV='dev' > .env"
 
 # Run the tests (with extra logging)
-; pytest -sv
+; pipenv run pytest -x
 
 # Run the app
-; python app.py
+; pipenv run python3 app.py
 
 # Now visit http://localhost:5000/index in your browser
 ```

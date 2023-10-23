@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from seeds.seed_db import *
 
 # Tests for your routes go here
 

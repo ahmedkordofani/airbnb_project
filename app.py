@@ -1,9 +1,10 @@
 import os
 from flask import Flask, request, render_template
-from lib.database_connection import get_flask_database_connection
+from lib.models import *
 
 # Create a new Flask app
 app = Flask(__name__)
+create_db_tables()
 
 # == Your Routes Here ==
 
