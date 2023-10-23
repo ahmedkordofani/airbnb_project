@@ -26,10 +26,10 @@ Everyone in the team should then clone this fork to their local machine to work 
 ; echo "export APP_ENV='dev' > .env"
 
 # Run the tests (with extra logging)
-; pytest -x
+; pipenv run pytest -x
 
 # Run the app
-; python3 app.py
+; pipenv run python3 app.py
 
 # Now visit http://localhost:5000/index in your browser
 ```
