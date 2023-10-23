@@ -11,6 +11,7 @@ pytest-playwright = "*"
 pytest-xprocess = "*"
 py = "*"
 peewee = "*"
+psycopg2 = "*"
 
 [dev-packages]
 autopep8 = "*"
