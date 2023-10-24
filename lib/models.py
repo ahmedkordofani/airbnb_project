@@ -1,5 +1,6 @@
 import peewee, os
 from datetime import datetime
+from hashlib import sha256
 
 # Connect to relevant database
 if os.environ.get('APP_ENV') == 'dev':
@@ -25,6 +26,17 @@ class User(peewee.Model):
     def check_email_exists(email):
         try:
             User.select(User.email).where(User.email == email).get()
+            return True
+        except:
+            return False
+    
+    def check_login_success(email, password):
+
+        # hash password
+        enc_pw = sha256(password.encode()).hexdigest()
+
+        try:
+            User.select().where(User.email == email and User.password == enc_pw).get()
             return True
         except:
             return False
