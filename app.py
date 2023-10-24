@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, render_template, redirect
 from lib.models import *
 from lib.validator import Validator
+from hashlib import sha256
 
 
 # Create a new Flask app
@@ -34,7 +35,9 @@ def post_signup_form():
 
     errors = vd.validate_signup(email, password, password_repeat)
     existing_user = User.check_email_exists(email)
+
     if not existing_user and not errors:
+        User.create(email=email, password=sha256(password.encode()).hexdigest())
         return redirect("/")
 
 
