@@ -70,3 +70,36 @@ def test_signup_fail(page, test_web_address):
 
     error = page.locator(".error")
     expect(error).to_have_count(1)
+
+def test_get_login_form(page, test_web_address):
+    page.goto(f"http://{test_web_address}/login")
+    form = page.locator(".log-in-form")
+    expect(form).to_have_count(1)
+
+def test_login_success(page, test_web_address):
+    page.goto(f"http://{test_web_address}/login")
+
+    email_box = page.locator("#email")
+    email_box.fill("jdoe@gmail.com")
+
+    password_box = page.locator("#password")
+    password_box.fill("jdoepassword")
+
+    submit_button = page.locator("#submit-login")
+    submit_button.click()
+
+    assert page.url == f"http://{test_web_address}/"
+
+def test_login_fail(page, test_web_address):
+    page.goto(f"http://{test_web_address}/login")
+
+    email_box = page.locator("#email")
+    email_box.fill("jdoe@gmail.com")
+
+    password_box = page.locator("#password")
+    password_box.fill("jdoepassword123")
+
+    submit_button = page.locator("#submit-login")
+    submit_button.click()
+
+    assert page.url == f"http://{test_web_address}/login"
