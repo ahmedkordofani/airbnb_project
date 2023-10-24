@@ -22,6 +22,13 @@ class User(peewee.Model):
         database = db
         table_name = 'users'
     
+    def check_email_exists(email):
+        try:
+            User.select(User.email).where(User.email == email).get()
+            return True
+        except:
+            return False
+    
 
 # Listing model
 class Listing(peewee.Model):
