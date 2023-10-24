@@ -1,4 +1,5 @@
-import peewee, os
+import peewee
+import os
 from datetime import datetime
 from hashlib import sha256
 
@@ -6,7 +7,8 @@ from hashlib import sha256
 if os.environ.get('APP_ENV') == 'dev':
     db = peewee.PostgresqlDatabase('airbnb-dev')
 elif os.environ.get('APP_ENV') == 'test':
-    db = peewee.PostgresqlDatabase('airbnb-test', host='localhost', port=5432, user='postgres', password='postgres')
+    db = peewee.PostgresqlDatabase(
+        'airbnb-test', host='localhost', port=5432, user='postgres', password='postgres')
 
 
 # define our models
@@ -22,14 +24,14 @@ class User(peewee.Model):
     class Meta:
         database = db
         table_name = 'users'
-    
+
     def check_email_exists(email):
         try:
             User.select(User.email).where(User.email == email).get()
             return True
         except:
             return False
-    
+
     def check_login_success(email, password):
 
         # hash password
@@ -40,7 +42,7 @@ class User(peewee.Model):
             return True
         except:
             return False
-    
+
 
 # Listing model
 class Listing(peewee.Model):
@@ -58,6 +60,15 @@ class Listing(peewee.Model):
         database = db
         table_name = 'listings'
 
+    def get_by_date(booking_start_date, booking_end_date):
+        listings = Listing.select().where(Listing.start_date <=
+                                          booking_start_date and Listing.end_date >= booking_end_date)
+        return [listing for listing in listings]
+
+    def get_all():
+        listings = Listing.select().where(Listing.end_date > datetime.today())
+        return [listing for listing in listings]
+
 
 # Booking model
 class Booking(peewee.Model):
@@ -73,7 +84,7 @@ class Booking(peewee.Model):
     class Meta:
         database = db
         table_name = 'bookings'
-    
+
 
 # create tables
 def create_db_tables():

@@ -1,4 +1,9 @@
-import pytest, sys, random, py, pytest, os
+import pytest
+import sys
+import random
+import py
+import pytest
+import os
 from xprocess import ProcessStarter
 from app import app
 
@@ -9,7 +14,8 @@ from app import app
 def test_web_address(xprocess):
     python_executable = sys.executable
     app_file = py.path.local(__file__).dirpath("../app.py")
-    port = str(random.randint(4000, 4999))
+    port = str(random.randint(10000, 11999))
+
     class Starter(ProcessStarter):
         env = {"PORT": port, "APP_ENV": "test", **os.environ}
         pattern = "Debugger PIN"
@@ -36,6 +42,6 @@ def test_web_address(xprocess):
 # We'll also create a fixture for the client we'll use to make test requests.
 @pytest.fixture
 def web_client():
-    app.config['TESTING'] = True # This gets us better errors
+    app.config['TESTING'] = True  # This gets us better errors
     with app.test_client() as client:
         yield client
