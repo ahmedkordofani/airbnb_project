@@ -200,3 +200,13 @@ h2 {
     background: #e2494f;
 }
 
+p {
+    font-style: italic;
+    color:#e2494f;
+    font-weight: bold;
+    padding-bottom: 10px;
+    font-size: large;
+
+    
+    
+}
