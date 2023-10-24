@@ -12,9 +12,13 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">About</a></li>
-                <li class="pipe">|</li>
-                <li><a href="#">Login</a></li>
+                {% if logged_in %}
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/signup">Sign up</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -24,14 +28,16 @@
 
     <div class="log-in-form">
         <h2>Log in</h2>
-        <p>Incorrect e-mail or password</p>
-        <form action="" method="post">
+        {% if not success %}
+            <p>Incorrect e-mail or password</p>
+        {% endif %}
+        <form action="/login" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <input type="submit" value="Log in">
+            <input type="submit" id="submit-login" value="Log in">
         </form>
     </div>
 
