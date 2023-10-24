@@ -39,6 +39,8 @@ def post_signup_form():
     if not existing_user and not errors:
         User.create(email=email, password=sha256(password.encode()).hexdigest())
         return redirect("/")
+    else:
+        return render_template('signup.html', errors=errors)
 
 
     
