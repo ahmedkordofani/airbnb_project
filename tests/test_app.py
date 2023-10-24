@@ -43,3 +43,6 @@ def test_signup_success(page, test_web_address):
     submit_button.click()
 
     assert page.url == f"http://{test_web_address}/"
+    
+    user = User.select().where(User.email == "benchmark@gmail.com").get()
+    assert user.email == "benchmark@gmail.com"
