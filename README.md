@@ -23,7 +23,7 @@ Everyone in the team should then clone this fork to their local machine to work 
 ; createdb airbnb-dev
 
 # create .env file
-; echo "export APP_ENV='dev' > .env"
+; echo "export APP_ENV='dev'" > .env
 
 # Run the tests (with extra logging)
 ; pipenv run pytest -x
