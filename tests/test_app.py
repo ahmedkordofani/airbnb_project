@@ -46,3 +46,27 @@ def test_signup_success(page, test_web_address):
     
     user = User.select().where(User.email == "benchmark@gmail.com").get()
     assert user.email == "benchmark@gmail.com"
+
+def test_signup_fail(page, test_web_address):
+    seed_database()
+
+    page.goto(f"http://{test_web_address}/signup")
+
+    email_box = page.locator("#email")
+    email_box.fill("benchmark@gmail.com")
+
+    password_box = page.locator("#password")
+    password_box.fill("1Password")
+
+    password_repeat_box = page.locator("#password-repeat")
+    password_repeat_box.fill("1Password")
+
+    submit_button = page.locator("#submit")
+    submit_button.click()
+
+    assert page.url == f"http://{test_web_address}/signup"
+
+    page.screenshot(path="screenshot.png")
+
+    error = page.locator(".error")
+    expect(error).to_have_count(1)
