@@ -13,6 +13,10 @@
         <nav>
             <ul>
                 {% if logged_in %}
+                    <li><a href="#">Spaces</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="#">Requests</a></li>
+                    <li class="pipe">|</li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
                     <li><a href="/signup">Sign up</a></li>
@@ -37,7 +41,7 @@
             {% endfor %}
         {% endif %}
 
-        <form action="/listaspace" method="post">
+        <form action="/spaces/new" method="post">
             <label for="name">Space Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -53,7 +57,7 @@
             <label for="available-to">Available To (DD/MM/YYYY):</label>
             <input type="text" id="available-to" name="available-to" required>
 
-            <input type="submit" id="submit" value="List My Space">
+            <input type="submit" id="submit-listing" value="List My Space">
         </form>
     </div>
 </body>

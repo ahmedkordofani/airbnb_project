@@ -17,7 +17,7 @@ def test_web_address(xprocess):
     port = str(random.randint(10000, 11999))
 
     class Starter(ProcessStarter):
-        env = {"PORT": port, "APP_ENV": "test", **os.environ}
+        env = {"PORT": port, "APP_ENV": "dev", **os.environ}
         pattern = "Debugger PIN"
         args = [python_executable, app_file]
 
