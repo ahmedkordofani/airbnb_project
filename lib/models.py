@@ -10,10 +10,10 @@ if os.environ.get('APP_ENV') == 'test':
 elif os.environ.get('APP_ENV') == 'prod':
     db = peewee.PostgresqlDatabase(
         't3_airbnb_database', 
-        host="dpg-cksf5rg5vl2c73fiee90-a.frankfurt-postgres.render.com", 
+        host=os.environ.get('POSTGRES_HOSTNAME'), 
         port=5432, 
         user='t3', 
-        password='1rhCLIfayatFKLtM4usERknEAdH9M64l')
+        password=os.environ.get('POSTGRES_PASSWORD'))
 else:
     db = peewee.PostgresqlDatabase('airbnb-dev')
 
