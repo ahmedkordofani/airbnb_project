@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Book a Space</title>
-    <link rel="stylesheet" type="text/css" href="/Users/francescomiccio/airbnb_project/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
     <header>
         <div id="logo">
-            <img src="/Users/francescomiccio/airbnb_project/static/images/download.png" alt="BNB logo">
+            <img src="/static/images/download.png" alt="BNB logo">
         </div>
         <nav>
             <ul>
@@ -46,10 +46,11 @@ width: 10px;
 
 
 <div class="book-a-space-form">
-    <form action="/book-a-space" method="post">
+    <form action="/spaces/new" method="post">
         <input type="submit" id="submit_space" value="List a Space">
+    </form>
 
-        
+    <form action="/spaces/search" method="post">
         <div class="inline-inputs">
         
             <label for="available-from">
@@ -70,14 +71,18 @@ width: 10px;
 
 <!--------------CONTEINERS-------------------------------->
 
-    <div class="main-container">
-        <a href="#">
-            <div class="sub-container">
-                <h3>Cozy Cabin</h3>
-                <p>Experience the charm of a rustic cabin nestled in the woods.></p>
-            </div>
-        </a>
-    </div>
+{% if spaces %}
+    {% for space in spaces %}
+        <div class="main-container listing">
+            <a href="/spaces/{{ space.id }}">
+                <div class="sub-container">
+                    <h3>{{ space.title }}</h3>
+                    <p>{{ space.description[:100] }}></p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
 
