@@ -4,19 +4,18 @@ from datetime import datetime
 from hashlib import sha256
 
 # Connect to relevant database
-if os.environ.get('APP_ENV') == 'dev':
-    db = peewee.PostgresqlDatabase('airbnb-dev')
-elif os.environ.get('APP_ENV') == 'test':
+if os.environ.get('APP_ENV') == 'test':
     db = peewee.PostgresqlDatabase(
         'airbnb-test', host='localhost', port=5432, user='postgres', password='postgres')
 elif os.environ.get('APP_ENV') == 'prod':
     db = peewee.PostgresqlDatabase(
-        'postgres', 
-        host='t3-airbnb-database', 
+        't3_airbnb_database', 
+        host="dpg-cksf5rg5vl2c73fiee90-a.frankfurt-postgres.render.com", 
         port=5432, 
-        user='postgres', 
-        password=os.environ.get('POSTGRES_PASSWORD'))
-
+        user='t3', 
+        password='1rhCLIfayatFKLtM4usERknEAdH9M64l')
+else:
+    db = peewee.PostgresqlDatabase('airbnb-dev')
 
 # define our models
 
