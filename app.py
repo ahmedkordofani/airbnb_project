@@ -79,4 +79,4 @@ def get_listaspace():
 # if started in test mode.
 if __name__ == '__main__':
     app.secret_key = os.urandom(24)
-    app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))

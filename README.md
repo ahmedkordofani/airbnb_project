@@ -9,6 +9,7 @@ Everyone in the team should then clone this fork to their local machine to work 
 ## Setup
 
 ```shell
+
 # Install dependencies and set up the virtual environment
 ; pipenv install
 
@@ -21,9 +22,6 @@ Everyone in the team should then clone this fork to their local machine to work 
 
 # Create a test and development database
 ; createdb airbnb-dev
-
-# create .env file
-; echo "export APP_ENV='dev'" > .env
 
 # Run the tests (with extra logging)
 ; pipenv run pytest -x
