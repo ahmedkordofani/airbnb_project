@@ -67,6 +67,9 @@ def logout():
         pass
     return redirect("/")
 
+@app.route('/sessions/new', methods=['GET'])
+def get_listaspace():
+    return render_template('listaspace.html', logged_in=True if 'user_id' in session else False)
 
     
 
@@ -76,4 +79,4 @@ def logout():
 # if started in test mode.
 if __name__ == '__main__':
     app.secret_key = os.urandom(24)
-    app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))

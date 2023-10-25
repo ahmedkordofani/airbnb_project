@@ -1,0 +1,10 @@
+{
+    "name": "t3-airbnb-web",
+    "domain": "t3-airbnb.xf.mkrs.link",
+    "port": 5001,
+    "env": {
+        "APP_ENV": "prod",
+        "POSTGRES_HOSTNAME": "dpg-cksf5rg5vl2c73fiee90-a.frankfurt-postgres.render.com",
+        "POSTGRES_PASSWORD": "@t3-postgres-password"
+    }
+}

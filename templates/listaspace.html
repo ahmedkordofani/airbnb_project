@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>List Your Space</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/static/images/download.png" alt="BNB logo">
+        </div>
+        <nav>
+            <ul>
+                {% if logged_in %}
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/signup">Sign up</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <div class="titles">
+        <h1>List Your Space</h1>
+        <h4>Share your space with travelers and become a host on MakersBnB. Whether it's a cozy apartment, a spacious house, or a unique property, welcome guests and start earning.</h4>
+    </div>
+
+    <div class="list-a-space-form">
+        <h2>List Your Space</h2>
+
+        {% if errors %}
+            {% for error in errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form action="/listaspace" method="post">
+            <label for="name">Space Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="price">Price per Night (£):</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="available-from">Available From (DD/MM/YYYY):</label>
+            <input type="text" id="available-from" name="available-from" required>
+
+            <label for="available-to">Available To (DD/MM/YYYY):</label>
+            <input type="text" id="available-to" name="available-to" required>
+
+            <input type="submit" id="submit" value="List My Space">
+        </form>
+    </div>
+</body>
+</html>
