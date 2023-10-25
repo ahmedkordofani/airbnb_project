@@ -60,7 +60,7 @@ class Validator:
         
         return errors
     
-    def validate_listing_search(start_date, end_date):
+    def validate_listing_search(self, start_date, end_date):
         errors = []
 
         try:
