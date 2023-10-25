@@ -9,8 +9,6 @@ Everyone in the team should then clone this fork to their local machine to work 
 ## Setup
 
 ```shell
-# change into web directory
-; cd web
 
 # Install dependencies and set up the virtual environment
 ; pipenv install
