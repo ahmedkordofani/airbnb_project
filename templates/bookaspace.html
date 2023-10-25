@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Space</title>
+    <link rel="stylesheet" type="text/css" href="/Users/francescomiccio/airbnb_project/static/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/Users/francescomiccio/airbnb_project/static/images/download.png" alt="BNB logo">
+        </div>
+        <nav>
+            <ul>
+                {% if logged_in %}
+                    <li><a href="#">Spaces</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="#">Requests</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/signup">Sign up</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+<style>
+::-webkit-scrollbar {
+width: 10px;
+}   
+</style>
+
+    <!-------------------------------TITLES--------------------------------------->
+<div class="titles">
+    <h1>Book a Spaces</h1>
+
+<h4>Discover Tranquil Retreats: Your Perfect Getaway Awaits at Our Cozy B&B Rooms</h4>
+
+</div>
+
+
+<!---------------------BOOK-A-SPACE-FORM PART------------------------->
+
+
+<div class="book-a-space-form">
+    <form action="/book-a-space" method="post">
+        <input type="submit" id="submit_space" value="List a Space">
+
+        
+        <div class="inline-inputs">
+        
+            <label for="available-from">
+            <h5>Available from (DD/MM/YY)</h5>
+            <input type="text" id="available-from" name="available-from" required>
+            </label>
+            
+        <label for="available-to">
+        <h5>Available to (DD/MM/YY)</h5>
+            <input type="text" id="available-to" name="available-to" required>
+        </label>
+        
+            <input type="submit" id="submit" value="List Spaces">
+        </div>
+    </form>
+</div>  
+
+
+<!--------------CONTEINERS-------------------------------->
+
+    <div class="main-container">
+        <div class="sub-container">
+            <a href="#">
+            <h3>Cozy Cabin</h3>
+            <p>Experience the charm of a rustic cabin nestled in the woods.></p>
+        </a>
+    </div>
+
+    <a href="">
+        <div class="sub-container">
+            <a href="#">
+            <h3>Beachfront Villa</h3>
+            <p>Relax in a luxurious beachfront villa with stunning ocean views.
+            </a> 
+        </div>
+    </a> 
+        <div class="sub-container">
+            <a href="#">
+            <h3>City Loft</h3>
+            <p>Stay in the heart of the city with easy access to all attractions.</p>
+            </a>
+        </div>
+        
+        <div class="sub-container">
+            <a href="#">
+            <h3>Mountain Retreat</h3>
+            <p>Escape to a tranquil mountain retreat and enjoy nature's beauty.</p>
+            </a>
+        </div>
+    
+        <div class="sub-container">
+            <a href="#">
+            <h3>Luxury Penthouse</h3>
+            <p>Indulge in a lavish penthouse with breathtaking skyline views.</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!----
+<div class="book-a-space-form">
+
+    <form action="/book-a-space" method="post">
+        <input type="submit" id="submit" value="List a Space">
+        
+        <label for="available from">Available from (DD/MM/YY):</label>
+        <input type="available from" id="available-from" name="available from" required>
+
+        <label for="available to">Available to (DD/MM?YY)</label>
+        <input type="available to" id="available-to" name="available to" required>
+
+        <input type="submit" id="submit" value="List Spaces">
+    </form>
+</div>
+
+<div class="book-a-space-form">
+    <form action="/book-a-space" method="post">
+        <h2>List a Space</h2>
+        <input type="submit" id="submit" value="List a Space">
+        
+        <div class="inline-inputs">
+            <label for="available-from">Available from (DD/MM/YY):</label>
+            <input type="text" id="available-from" name="available-from" required>
+
+            <label for="available-to">Available to (DD/MM/YY)</label>
+            <input type="text" id="available-to" name="available-to" required>
+
+            <input type="submit" id="submit" value="List Spaces">
+        </div>
+    </form>
+</div>
