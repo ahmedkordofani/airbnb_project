@@ -66,9 +66,10 @@ class Listing(peewee.Model):
         database = db
         table_name = 'listings'
 
-    def get_by_date(booking_start_date, booking_end_date):
-        listings = Listing.select().where(Listing.start_date <=
-                                          booking_start_date and Listing.end_date >= booking_end_date)
+    def get_by_date(target_start_date, target_end_date):
+        listings = Listing.select().where(
+            Listing.start_date <= target_start_date, target_end_date <= Listing.end_date
+            )
         return [listing for listing in listings]
 
     def get_all():
