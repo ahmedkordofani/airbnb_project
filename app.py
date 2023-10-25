@@ -38,7 +38,7 @@ def post_signup_form():
 
     if not existing_user and not errors:
         User.create(email=email, password=sha256(password.encode()).hexdigest())
-        return redirect("/")
+        return redirect("/login")
     else:
         return render_template('signup.html', errors=errors, logged_in=True if 'user_id' in session else False)
 
@@ -67,11 +67,43 @@ def logout():
         pass
     return redirect("/")
 
-@app.route('/sessions/new', methods=['GET'])
+@app.route('/spaces/new', methods=['GET'])
 def get_listaspace():
-    return render_template('listaspace.html', logged_in=True if 'user_id' in session else False)
 
-    
+    if 'user_id' in session:
+        return render_template('listaspace.html', logged_in=True if 'user_id' in session else False)
+    else:
+        return redirect("/login")
+
+@app.route('/spaces/new', methods=['POST'])
+def create_listing():
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    else:
+
+        vd = Validator()
+
+        title = request.form["name"]
+        description = request.form["description"]
+        price = float(request.form["price"])
+        start_date = request.form["available-from"]
+        end_date = request.form["available-to"]
+
+        errors = vd.validate_listing(title, description, price, start_date, end_date)
+
+        if not errors:
+            Listing.create(
+                title=title, 
+                description=description, 
+                price=price, 
+                start_date=datetime.strptime(start_date, "%d/%m/%Y").strftime("%Y-%m-%d"),
+                end_date=datetime.strptime(end_date, "%d/%m/%Y").strftime("%Y-%m-%d"),
+                owner=session['user_id']
+                )
+            return redirect("/")
+        else:
+            return render_template('listaspace.html', errors=errors, logged_in=True if 'user_id' in session else False)
 
 
 # These lines start the server if you run this file directly
