@@ -42,7 +42,7 @@ def test_signup_success(page, test_web_address):
     submit_button = page.locator("#submit")
     submit_button.click()
 
-    assert page.url == f"http://{test_web_address}/"
+    assert page.url == f"http://{test_web_address}/login"
     
     user = User.select().where(User.email == "benchmark@gmail.com").get()
     assert user.email == "benchmark@gmail.com"
@@ -65,8 +65,6 @@ def test_signup_fail(page, test_web_address):
     submit_button.click()
 
     assert page.url == f"http://{test_web_address}/signup"
-
-    page.screenshot(path="screenshot.png")
 
     error = page.locator(".error")
     expect(error).to_have_count(1)
@@ -133,7 +131,7 @@ def test_create_listing(page, test_web_address):
     price_box = page.locator("#price")
     price_box.fill("100")
 
-    start_date_box = page.locator("available-from")
+    start_date_box = page.locator("#available-from")
     start_date_box.fill("24/11/2024")
 
     end_date_box = page.locator("#available-to")
@@ -143,3 +141,40 @@ def test_create_listing(page, test_web_address):
     submit_button.click()
 
     assert page.url == f'http://{test_web_address}/'
+
+def test_invalid_listing(page, test_web_address):
+    seed_database()
+
+    page.goto(f"http://{test_web_address}/login")
+
+    email_box = page.locator("#email")
+    email_box.fill("jdoe@gmail.com")
+
+    password_box = page.locator("#password")
+    password_box.fill("jdoepassword")
+
+    submit_button = page.locator("#submit-login")
+    submit_button.click()
+
+    page.goto(f"http://{test_web_address}/spaces/new")
+
+    name_box = page.locator("#name")
+    name_box.fill("Test Listing")
+
+    description_box = page.locator("#description")
+    description_box.fill("Test Description")
+
+    price_box = page.locator("#price")
+    price_box.fill("-100")
+
+    start_date_box = page.locator("#available-from")
+    start_date_box.fill("24/11/2024")
+
+    end_date_box = page.locator("#available-to")
+    end_date_box.fill("23/11/2024")
+
+    submit_button = page.locator("#submit-listing")
+    submit_button.click()
+
+    errors = page.locator(".error")
+    expect(errors).to_have_count(2)
