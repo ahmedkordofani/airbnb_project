@@ -67,6 +67,9 @@ def logout():
         pass
     return redirect("/")
 
+@app.route('/listaspace', methods=['GET'])
+def get_listaspace():
+    return render_template('listaspace.html', logged_in=True if 'user_id' in session else False)
 
     
 
