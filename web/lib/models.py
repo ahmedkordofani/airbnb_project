@@ -9,6 +9,14 @@ if os.environ.get('APP_ENV') == 'dev':
 elif os.environ.get('APP_ENV') == 'test':
     db = peewee.PostgresqlDatabase(
         'airbnb-test', host='localhost', port=5432, user='postgres', password='postgres')
+elif os.environ.get('APP_ENV') == 'prod':
+    db = peewee.PostgresqlDatabase(
+        os.environ.get('postgres', 
+                       host='t3-airbnb-database', 
+                       port=5432, 
+                       user='postgres', 
+                       password=os.environ.get('POSTGRES_PASSWORD'))
+    )
 
 
 # define our models
