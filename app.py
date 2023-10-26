@@ -101,7 +101,7 @@ def create_listing():
                 end_date=datetime.strptime(end_date, "%d/%m/%Y").strftime("%Y-%m-%d"),
                 owner=session['user_id']
                 )
-            return redirect("/")
+            return redirect("/spaces")
         else:
             return render_template('listaspace.html', errors=errors, logged_in=True if 'user_id' in session else False)
 
@@ -134,6 +134,100 @@ def list_search_spaces():
     else:
         spaces = Listing.get_all()
         return render_template('bookaspace.html', errors=errors, spaces=spaces, logged_in=True if 'user_id' in session else False)
+
+@app.route('/spaces/<int:listing_id>', methods=['GET'])
+def list_date_selection(listing_id):
+
+    if 'user_id' not in session:
+        return redirect("/login")
+
+    listing = Listing.get_by_id(listing_id)
+
+    return render_template('spaces.html', listing=listing, logged_in=True if 'user_id' in session else False)
+
+@app.route('/spaces/<int:listing_id>', methods=['POST'])
+def create_booking(listing_id):
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    
+    else:
+        Booking.create(
+            start_date=datetime.strptime(request.form["available-from"], "%d/%m/%Y").strftime("%Y-%m-%d"),
+            end_date=datetime.strptime(request.form["available-to"], "%d/%m/%Y").strftime("%Y-%m-%d"),
+            listing=listing_id,
+            user=session['user_id']
+        )
+        return redirect("/spaces")
+
+@app.route('/requests', methods=['GET'])
+def list_requests():
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    else:
+        requests = Booking.select().join(Listing).where(Booking.listing.owner == session['user_id'])
+        booked_spaces = Booking.select().where(Booking.user == session['user_id'])
+
+
+        #return render_template('requests.html', booked_spaces=booked_spaces, requests=requests, logged_in=True if 'user_id' in session else False)
+
+@app.route('/requests/<int:booking_id>', methods=['GET'])
+def get_request_details(booking_id):
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    
+    try:
+        booking = Booking.select().join(Listing).where(Booking.id == booking_id).get()
+    except:
+        return redirect("/requests")
+    
+    if session['user_id'] != booking.listing.owner:
+        return redirect("/requests")
+
+    other_bookings = Booking.select().where(Booking.start_date == booking.start_date, Booking.id != booking.id)
+    
+    # return render template for request details
+
+@app.route('/requests/<int:booking_id>/confirm', methods=['POST'])
+def confirm_booking_request(booking_id):
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    
+    try:
+        booking = Booking.select().join(Listing).where(Booking.id == booking_id).get()
+    except:
+        return redirect("/requests")
+    
+    if session['user_id'] != booking.listing.owner:
+        return redirect("/requests")
+    else:
+        booking.approved = True
+        booking.save()
+
+        Booking.cancel_other_bookings(booking)
+
+    return redirect("/requests")
+
+@app.route('/requests/<int:booking_id>/decline', methods=['POST'])
+def decline_booking_request(booking_id):
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    
+    try:
+        booking = Booking.select().join(Listing).where(Booking.id == booking_id).get()
+    except:
+        return redirect("/requests")
+    
+    if session['user_id'] != booking.listing.owner:
+        return redirect("/requests")
+    else:
+        Booking.delete_by_id(booking_id)
+
+    return redirect("/requests")
 
 
 
