@@ -124,8 +124,8 @@ def create_listing():
                 title=title, 
                 description=description, 
                 price=price, 
-                start_date=datetime.strptime(start_date, "%d/%m/%Y").strftime("%Y-%m-%d"),
-                end_date=datetime.strptime(end_date, "%d/%m/%Y").strftime("%Y-%m-%d"),
+                start_date=start_date,
+                end_date=end_date,
                 owner=session['user_id']
                 )
             return redirect("/spaces")
@@ -156,7 +156,7 @@ def list_search_spaces():
     errors = vd.validate_listing_search(start_date, end_date)
 
     if not errors:
-        spaces = Listing.get_by_date(datetime.strptime(start_date, '%d/%m/%Y'), datetime.strptime(end_date, '%d/%m/%Y'))
+        spaces = Listing.get_by_date(start_date, end_date)
         return render_template('bookaspace.html', spaces=spaces, logged_in=True if 'user_id' in session else False)
     else:
         spaces = Listing.get_all()
@@ -180,8 +180,8 @@ def create_booking(listing_id):
     
     else:
         Booking.create(
-            start_date=datetime.strptime(request.form["available-from"], "%d/%m/%Y").strftime("%Y-%m-%d"),
-            end_date=datetime.strptime(request.form["available-to"], "%d/%m/%Y").strftime("%Y-%m-%d"),
+            start_date=request.form["available-from"].strftime("%Y-%m-%d"),
+            end_date=request.form["available-to"].strftime("%Y-%m-%d"),
             listing=listing_id,
             user=session['user_id']
         )

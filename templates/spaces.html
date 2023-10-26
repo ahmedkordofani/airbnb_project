@@ -9,10 +9,6 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 selectable: true,
-                select: function(info) {
-                    // Handle the click event for a selected date here
-                    alert('You clicked on: ' + info.startStr);
-                },
             });
             calendar.render();
         });
@@ -28,9 +24,9 @@
         <nav>
             <ul>
                 {% if logged_in %}
-                    <li><a href="#">Spaces</a></li>
+                    <li><a href="/spaces">Spaces</a></li>
                     <li class="pipe">|</li>
-                    <li><a href="#">Requests</a></li>
+                    <li><a href="/requests">Requests</a></li>
                     <li class="pipe">|</li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
