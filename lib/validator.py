@@ -59,4 +59,19 @@ class Validator:
                 errors.append('Start date cannot be in the past')
         
         return errors
+    
+    def validate_listing_search(self, start_date, end_date):
+        errors = []
+
+        try:
+            st_date = datetime.strptime(start_date, '%d/%m/%Y')
+        except:
+            errors.append('Start date must be valid')
+        
+        try:
+            en_date = datetime.strptime(end_date, '%d/%m/%Y')
+        except:
+            errors.append('End date must be valid')
+        
+        return errors
         

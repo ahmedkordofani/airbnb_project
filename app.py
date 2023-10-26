@@ -105,10 +105,45 @@ def create_listing():
         else:
             return render_template('listaspace.html', errors=errors, logged_in=True if 'user_id' in session else False)
 
+@app.route('/spaces', methods=['GET'])
+def list_spaces():
+
+    if 'user_id' not in session:
+        return redirect("/login")
+
+    spaces = Listing.get_all()
+
+    return render_template('bookaspace.html', spaces=spaces, logged_in=True if 'user_id' in session else False)
+
+@app.route('/spaces/search', methods=['POST'])
+def list_search_spaces():
+
+    if 'user_id' not in session:
+        return redirect("/login")
+    
+    vd = Validator()
+
+    start_date = request.form["available-from"]
+    end_date = request.form["available-to"]
+
+    errors = vd.validate_listing_search(start_date, end_date)
+
+    if not errors:
+        spaces = Listing.get_by_date(datetime.strptime(start_date, '%d/%m/%Y'), datetime.strptime(end_date, '%d/%m/%Y'))
+        return render_template('bookaspace.html', spaces=spaces, logged_in=True if 'user_id' in session else False)
+    else:
+        spaces = Listing.get_all()
+        return render_template('bookaspace.html', errors=errors, spaces=spaces, logged_in=True if 'user_id' in session else False)
+
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
 if __name__ == '__main__':
-    app.secret_key = os.urandom(24)
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
+    if os.environ.get('APP_ENV') not in ['prod', 'test']:
+        app.secret_key = os.urandom(24)
+        app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
+    else:
+        app.secret_key = os.urandom(24)
+        app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
