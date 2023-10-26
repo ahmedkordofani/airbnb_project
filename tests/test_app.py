@@ -140,7 +140,7 @@ def test_create_listing(page, test_web_address):
     submit_button = page.locator("#submit-listing")
     submit_button.click()
 
-    assert page.url == f'http://{test_web_address}/'
+    assert page.url == f'http://{test_web_address}/spaces'
 
 def test_invalid_listing(page, test_web_address):
     seed_database()
