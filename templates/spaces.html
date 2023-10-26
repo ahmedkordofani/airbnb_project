@@ -3,15 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery for AJAX -->
+
     <script>
+        var selectedDate = null; // Initialize the selectedDate variable
+        
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 selectable: true,
+                select: function(info) {
+                    // Store the selected date in the selectedDate variable
+                    selectedDate = info.startStr;
+                },
+                validRange: {
+                    start: new Date().toISOString().split("T")[0], // Start from today's date
+                },
             });
             calendar.render();
         });
+
+        $(document).ready(function() {
+            // Handle the button click event
+            $('#request-button').click(function() {
+                if (selectedDate) {
+                    // Send the selected date to the Flask route using AJAX
+                    $.ajax({
+                        type: 'POST',
+                        url: '/spaces/{{ listing_id|safe }}',
+                        data: { selectedDate: selectedDate },
+                        success: function(response) {
+                            alert('Selected date sent to Flask: ' + selectedDate);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     </script>
     <title>Spaces</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
