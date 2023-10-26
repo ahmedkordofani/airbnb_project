@@ -70,8 +70,8 @@
     <!-------------------------------TITLES--------------------------------------->
     <div class="titles">
         <!-- Space name and description from the selected space -->
-        <h1>Cozy Cabin</h1>
-        <h4>Experience the charm of a rustic cabin nestled in the woods.</h4>
+        <h1>{{ listing.title }}</h1>
+        <h4>{{ listing.description }}</h4>
     </div>
 
     <!-----------------PICK-A-NIGHT-SECTION------------------------>
@@ -82,7 +82,7 @@
         <!-- Calendar for available dates -->
         <div id="calendar"></div>
 
-        <button id="request-button">Request to Book</button>
+        <button id="request-button">Request to Book: {{ "£%.2f"|format(listing.price) }} / night</button>
     </div>
 </body>
 </html>

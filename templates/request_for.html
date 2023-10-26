@@ -35,38 +35,45 @@ width: 10px;
 
     <!-------------------------------TITLES--------------------------------------->
 <div class="titles">
-    <h1>Request for 'Beautiful Relaxing Space'</h1>
+    <h1>Request for '{{ booking.listing.title }}'</h1>
 
-<h4>Discover Tranquil Retreats: Your Perfect Getaway Awaits at Our Cozy B&B Rooms</h4>
-<h2>From:<h2></h2></h2>
-<h2>Date:<h2></h2></h2>
-<h2>No of Spaces Booked:<h2></h2></h2>
+<h4>{{ booking.listing.description }}</h4>
+<h2>From: {{ booking.user.email }}<h2></h2></h2>
+<h2>Date: {{ booking.start_date }}<h2></h2></h2>
 
 </div>
 
 <!------------------------------------CONTAINERS----------------------------------->
-<div class="comments">
-    <h3>Other Requests for this Space</h3>
-</div>
-
-
-<div class="main-container-request-for">
-    
-    <div class="container">
-        <a class="sub-container-request-for" href="">
-            <div class="text">
-            <h3>Cozy Cabin</h3>
-            <p>Experience the charm of a rustic cabin nestled in the woods.</p>
-            </div>
-            <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
-        </a>
+{% if other_bookings %}
+    <div class="comments">
+        <h3>Other Requests for this Space</h3>
     </div>
+
+    {% for booking in other_bookings %}
+        <div class="main-container-request-for">
+            
+            <div class="container">
+                <a class="sub-container-request-for" href="/requests/{{ booking.id }}">
+                    <div class="text">
+                    <h3>{{ booking.listing.title }}</h3>
+                    <p>{{ booking.listing.description[:100]}}</p>
+                    </div>
+                    <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+                </a>
+            </div>
+
+        </div>
+    {% endfor %}
+{% endif %}
 
 
 
 <!-----------------------BUTTONS--------------------->
-<div class="buttons_CD">
-    <input type="submit" id="submit" value="Confirm Request from:">
-    <input type="submit" id="submit" value="Deny Request from:">
-
-</div>
+    <div class="buttons_CD">
+        <form action="/requests/{{ booking.id }}/confirm" method="POST">
+            <input type="submit" id="submit" value="Confirm Request from: {{ booking.user.email }}">
+        </form>
+        <form action="/requests/{{ booking.id }}/decline" method="POST">
+            <input type="submit" id="submit" value="Deny Request from: {{ booking.user.email }}">
+        </form>
+    </div>

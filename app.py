@@ -5,7 +5,8 @@ from lib.validator import Validator
 from hashlib import sha256
 from email.message import EmailMessage
 from threading import Thread
-
+from json import dumps
+from datetime import timedelta
 
 # email info globals
 EMAIL_ADDR = os.environ.get('EMAIL_ADDR')
@@ -92,7 +93,7 @@ def logout():
         session.pop("user_id")
     except:
         pass
-    return redirect("/")
+    return redirect("/login")
 
 @app.route('/spaces/new', methods=['GET'])
 def get_listaspace():
@@ -170,7 +171,7 @@ def list_date_selection(listing_id):
 
     listing = Listing.get_by_id(listing_id)
 
-    return render_template('spaces.html', listing=listing, logged_in=True if 'user_id' in session else False)
+    return render_template('spaces.html', listing_id=dumps(listing_id), listing=listing, logged_in=True if 'user_id' in session else False)
 
 @app.route('/spaces/<int:listing_id>', methods=['POST'])
 def create_booking(listing_id):
@@ -179,9 +180,11 @@ def create_booking(listing_id):
         return redirect("/login")
     
     else:
+        date = datetime.strptime(request.form['selectedDate'], '%Y-%m-%d')
+
         Booking.create(
-            start_date=request.form["available-from"].strftime("%Y-%m-%d"),
-            end_date=request.form["available-to"].strftime("%Y-%m-%d"),
+            start_date=date,
+            end_date= date + timedelta(days=1),
             listing=listing_id,
             user=session['user_id']
         )
@@ -199,7 +202,7 @@ def list_requests():
     if 'user_id' not in session:
         return redirect("/login")
     else:
-        requests = Booking.select().join(Listing).where(Booking.listing.owner == session['user_id'])
+        requests = Booking.select().join(Listing).where(Booking.listing.owner == session['user_id'], Booking.approved == False)
         booked_spaces = Booking.select().where(Booking.user == session['user_id'])
 
 
@@ -216,7 +219,7 @@ def get_request_details(booking_id):
     except:
         return redirect("/requests")
     
-    if session['user_id'] != booking.listing.owner:
+    if session['user_id'] != booking.listing.owner.id:
         return redirect("/requests")
 
     other_bookings = Booking.select().where(Booking.start_date == booking.start_date, Booking.id != booking.id)
@@ -234,11 +237,10 @@ def confirm_booking_request(booking_id):
     except:
         return redirect("/requests")
     
-    if session['user_id'] != booking.listing.owner:
+    if session['user_id'] != booking.listing.owner.id:
         return redirect("/requests")
     else:
-        booking.approved = True
-        booking.save()
+        Booking.update(approved=True).where(Booking.id == booking_id).execute()
 
         # send confirmation email
         email = User.select().where(User.id == booking.user).get().email
@@ -260,7 +262,7 @@ def decline_booking_request(booking_id):
     except:
         return redirect("/requests")
     
-    if session['user_id'] != booking.listing.owner:
+    if session['user_id'] != booking.listing.owner.id:
         return redirect("/requests")
     else:
         Booking.delete_by_id(booking_id)
