@@ -40,13 +40,13 @@ class Validator:
         dates_valid = True
 
         try:
-            st_date = datetime.strptime(start_date, '%d/%m/%Y')
+            st_date = datetime.strptime(start_date, '%Y-%m-%d')
         except:
             errors.append('Start date must be valid')
             dates_valid = False
         
         try:
-            en_date = datetime.strptime(end_date, '%d/%m/%Y')
+            en_date = datetime.strptime(end_date, '%Y-%m-%d')
         except:
             errors.append('End date must be valid')
             dates_valid = False
@@ -64,12 +64,12 @@ class Validator:
         errors = []
 
         try:
-            st_date = datetime.strptime(start_date, '%d/%m/%Y')
+            st_date = datetime.strptime(start_date, '%Y-%m-%d')
         except:
             errors.append('Start date must be valid')
         
         try:
-            en_date = datetime.strptime(end_date, '%d/%m/%Y')
+            en_date = datetime.strptime(end_date, '%Y-%m-%d')
         except:
             errors.append('End date must be valid')
         

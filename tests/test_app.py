@@ -132,10 +132,10 @@ def test_create_listing(page, test_web_address):
     price_box.fill("100")
 
     start_date_box = page.locator("#available-from")
-    start_date_box.fill("24/11/2024")
+    start_date_box.fill("2024-11-25")
 
     end_date_box = page.locator("#available-to")
-    end_date_box.fill("27/11/2024")
+    end_date_box.fill("2024-11-27")
 
     submit_button = page.locator("#submit-listing")
     submit_button.click()
@@ -168,10 +168,10 @@ def test_invalid_listing(page, test_web_address):
     price_box.fill("-100")
 
     start_date_box = page.locator("#available-from")
-    start_date_box.fill("24/11/2024")
+    start_date_box.fill("2024-11-24")
 
     end_date_box = page.locator("#available-to")
-    end_date_box.fill("23/11/2024")
+    end_date_box.fill("2024-11-23")
 
     submit_button = page.locator("#submit-listing")
     submit_button.click()
@@ -215,10 +215,10 @@ def test_search_a_space(page, test_web_address):
     page.goto(f"http://{test_web_address}/spaces")
 
     start_box = page.locator("#available-from")
-    start_box.fill("25/11/2023")
+    start_box.fill("2023-11-25")
 
     end_box = page.locator("#available-to")
-    end_box.fill("27/11/2023")
+    end_box.fill("2023-11-27")
 
     submit_button = page.locator("#submit")
     submit_button.click()
