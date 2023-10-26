@@ -88,7 +88,7 @@ def test_login_success(page, test_web_address):
     submit_button = page.locator("#submit-login")
     submit_button.click()
 
-    assert page.url == f"http://{test_web_address}/"
+    assert page.url == f"http://{test_web_address}/spaces"
 
 def test_login_fail(page, test_web_address):
     seed_database()

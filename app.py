@@ -1,9 +1,32 @@
-import os
+import os, smtplib, ssl
 from flask import Flask, request, render_template, redirect, session
 from lib.models import *
 from lib.validator import Validator
 from hashlib import sha256
+from email.message import EmailMessage
+from threading import Thread
 
+
+# email info globals
+EMAIL_ADDR = os.environ.get('EMAIL_ADDR')
+GMAIL_APP_PW = os.environ.get('GMAIL_APP_PW')
+
+# function for emailing
+def send_email(receiver, subject, content):
+    # stop function if no email or password found
+    if EMAIL_ADDR is None or GMAIL_APP_PW is None:
+        return None
+    
+    em = EmailMessage()
+    em.set_content(content)
+    em['Subject'] = subject
+    em['From'] = EMAIL_ADDR
+    em['To'] = receiver
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as s:
+        s.login(EMAIL_ADDR, GMAIL_APP_PW)
+        s.sendmail(EMAIL_ADDR, [receiver], em.as_string())
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -38,6 +61,10 @@ def post_signup_form():
 
     if not existing_user and not errors:
         User.create(email=email, password=sha256(password.encode()).hexdigest())
+
+        # send email
+        Thread(target=send_email, args=(email, "Welcome to AirBnB", "Welcome to AirBnB!")).start()
+
         return redirect("/login")
     else:
         return render_template('signup.html', errors=errors, logged_in=True if 'user_id' in session else False)
@@ -55,7 +82,7 @@ def post_login_form():
 
     if success:
         session["user_id"] = User.select(User.id).where(User.email == email).get().id
-        return redirect("/")
+        return redirect("/spaces")
     else:
         return render_template('login.html', success=success, logged_in=True if 'user_id' in session else False)
     
@@ -158,6 +185,12 @@ def create_booking(listing_id):
             listing=listing_id,
             user=session['user_id']
         )
+        listing = Listing.select().where(Listing.id == listing_id).get()
+        email = User.select().where(User.id == listing.owner).get().email
+
+        # send email
+        Thread(target=send_email, args=(email, "Booking Confirmation", "Your booking has been confirmed!")).start()
+
         return redirect("/spaces")
 
 @app.route('/requests', methods=['GET'])
@@ -207,6 +240,11 @@ def confirm_booking_request(booking_id):
         booking.approved = True
         booking.save()
 
+        # send confirmation email
+        email = User.select().where(User.id == booking.user).get().email
+        Thread(target=send_email, args=(email, "Booking Confirmation", "Your booking has been confirmed!")).start()
+
+        # cancel other bookings
         Booking.cancel_other_bookings(booking)
 
     return redirect("/requests")
