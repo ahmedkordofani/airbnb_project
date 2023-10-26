@@ -13,9 +13,9 @@
         <nav>
             <ul>
                 {% if logged_in %}
-                    <li><a href="#">Spaces</a></li>
+                    <li><a href="/spaces">Spaces</a></li>
                     <li class="pipe">|</li>
-                    <li><a href="#">Requests</a></li>
+                    <li><a href="/requests">Requests</a></li>
                     <li class="pipe">|</li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
@@ -46,20 +46,21 @@ width: 10px;
 
 
 <div class="book-a-space-form">
-    <form action="/book-a-space" method="post">
+    <form action="/spaces/new" method="get">
         <input type="submit" id="submit_space" value="List a Space">
+    </form>
 
-        
+    <form action="/spaces/search" method="post">
         <div class="inline-inputs">
         
             <label for="available-from">
             <h5>Available from (DD/MM/YY)</h5>
-            <input type="text" id="available-from" name="available-from" required>
+            <input type="date" id="available-from" name="available-from" required>
             </label>
             
         <label for="available-to">
         <h5>Available to (DD/MM/YY)</h5>
-            <input type="text" id="available-to" name="available-to" required>
+            <input type="date" id="available-to" name="available-to" required>
         </label>
         
             <input type="submit" id="submit" value="List Spaces">
@@ -68,38 +69,21 @@ width: 10px;
 </div>  
 
 
-<!--------------CONTEINERS-------------------------------->
-
-<div class="main-container">
-    <div class="container-bookspace">
-        <a class="sub-container-bookspace" href="">
-            <div>
-             <h3>Cozy Cabin</h3>
-             <p>Experience the charm of a rustic cabin nestled in the woods.</p>
-            </div>
-            <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
-        </a>
-    </div>
-</div>
+<!--------------CONTAINERS-------------------------------->
+{% if spaces %}
+    {% for space in spaces %}
+      <div class="main-container">
+          <div class="container-bookspace">
+              <a class="sub-container-bookspace" href="/spaces/{{ space.id }}">
+                  <div>
+                   <h3>{{ space.title }}</h3>
+                    <p>{{ space.description[:100] }}></p>
+                  </div>
+                  <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+              </a>
+          </div>
+      </div>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

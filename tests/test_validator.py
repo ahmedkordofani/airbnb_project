@@ -1,4 +1,5 @@
 from lib.validator import Validator
+from datetime import datetime
 
 def test_valid_password():
     vd = Validator()
@@ -34,3 +35,30 @@ def test_invalid_emails():
 
     # test no domain
     assert vd.validate_signup('jdoe@.com', '1@Password', '1@Password') == ['Email must be valid']
+
+def test_validate_listing():
+    vd = Validator()
+
+    # test empty title
+    assert vd.validate_listing('', 'description', 1, '2023-11-24', '2023-11-27') == ['Title cannot be blank']
+
+    # test empty description
+    assert vd.validate_listing('title', '', 1, '2023-11-24', '2023-11-27') == ['Description cannot be blank']
+
+    # test negative price
+    assert vd.validate_listing('title', 'description', -1, '2023-11-24', '2023-11-27') == ['Price cannot be negative']
+
+    # test empty start date
+    assert vd.validate_listing('title', 'description', 1, '', '2023-11-27') == ['Start date must be valid']
+
+    # test empty end date
+    assert vd.validate_listing('title', 'description', 1, '2023-11-24', '') == ['End date must be valid']
+
+    # test end date before start date
+    assert vd.validate_listing('title', 'description', 1, '2023-11-27', '2023-11-24') == ['End date must be after start date']
+
+    # test start date in the past
+    assert vd.validate_listing('title', 'description', 1, '2022-11-24', '2023-11-27') == ['Start date cannot be in the past']
+
+    # test valid listing
+    assert vd.validate_listing('title', 'description', 1, '2023-11-24', '2023-11-27') == []

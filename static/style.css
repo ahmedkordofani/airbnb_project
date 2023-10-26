@@ -543,3 +543,50 @@ a.sub-container-request-for {
 .buttons_CD {
     margin-bottom: 60px;
 }
+
+/**************************SPACES-FORM-SECTION*******************************/
+
+
+/* Style for the Pick a Night section */
+.pick-a-night-section {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; 
+}
+
+/* Style for the Pick a Night title */
+.pick-a-night-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style for the calendar container */
+#calendar {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto; /* Center the container horizontally */
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+/* Style for the calendar cells (dates) on hover */
+.fc-day:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+/* Style for the Request to Book button */
+#request-button {
+    background: #ff5a5f;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+}

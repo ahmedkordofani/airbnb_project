@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 class Validator:
     def validate_signup(self, email, pw, pw_confirm):
@@ -23,5 +24,54 @@ class Validator:
             errors.append('Passwords must match')
         
         return errors
+    
+    def validate_listing(self, title, description, price, start_date, end_date):
+        errors = []
 
+        if title == '' or title.isspace():
+            errors.append('Title cannot be blank')
+        
+        if description == '' or description.isspace():
+            errors.append('Description cannot be blank')
+        
+        if price < 0:
+            errors.append('Price cannot be negative')
+
+        dates_valid = True
+
+        try:
+            st_date = datetime.strptime(start_date, '%Y-%m-%d')
+        except:
+            errors.append('Start date must be valid')
+            dates_valid = False
+        
+        try:
+            en_date = datetime.strptime(end_date, '%Y-%m-%d')
+        except:
+            errors.append('End date must be valid')
+            dates_valid = False
+
+        if dates_valid:
+            if en_date < st_date:
+                errors.append('End date must be after start date')
+
+            if st_date < datetime.today():
+                errors.append('Start date cannot be in the past')
+        
+        return errors
+    
+    def validate_listing_search(self, start_date, end_date):
+        errors = []
+
+        try:
+            st_date = datetime.strptime(start_date, '%Y-%m-%d')
+        except:
+            errors.append('Start date must be valid')
+        
+        try:
+            en_date = datetime.strptime(end_date, '%Y-%m-%d')
+        except:
+            errors.append('End date must be valid')
+        
+        return errors
         
