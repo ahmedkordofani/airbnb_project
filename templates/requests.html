@@ -46,27 +46,34 @@
 
 
 <div class="main-container-request">
-    
-    <div class="container">
-        <a class="sub-container-request" href="">
-            <div class="text">
-            <h3>Cozy Cabin</h3>
-            <p>Experience the charm of a rustic cabin nestled in the woods.</p>
-            </div>
-            <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
-        </a>
-    </div>
 
-    
-<div class="container"> 
-    <a class="sub-container-request" href="">
-        <div class="text">
-        <h3>Beachfront Villa</h3>
-        <p>Relax in a luxurious beachfront villa with stunning ocean views.</p>
-        </div>
-        <img class="arrow" src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
-</a>
-</div>
+    {% if booked_spaces %}
+        {% for booking in booked_spaces %}
+            <div class="container">
+                <a class="sub-container-request" href="/spaces/{{ booking.listing.id }}">
+                    <div class="text">
+                    <h3>{{ booking.listing.title }}</h3>
+                    <p>{{ booking.listing.description[:100] }}</p>
+                    </div>
+                    <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if requests %}
+        {% for request in requests %} 
+            <div class="container"> 
+                <a class="sub-container-request" href="/requests/{{ request.id }}">
+                    <div class="text">
+                    <h3>{{ request.listing.title }}</h3>
+                    <p>{{ request.listing.description[:100] }}</p>
+                    </div>
+                    <img class="arrow" src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
 
 
     

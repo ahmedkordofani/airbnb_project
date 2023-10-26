@@ -21,4 +21,5 @@ def seed_database():
 
     # create test booking
     Booking.create(start_date='2023-11-24', end_date='2023-11-25', listing=1, user=2, approved=False)
-    Booking.create(start_date='2023-11-17', end_date='2023-11-18', listing=2, user=1, approved=True)
+    Booking.create(start_date='2023-11-17', end_date='2023-11-18', listing=2, user=1, approved=False)
+    Booking.create(start_date='2023-11-17', end_date='2023-11-18', listing=2, user=1, approved=False)
