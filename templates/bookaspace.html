@@ -13,9 +13,9 @@
         <nav>
             <ul>
                 {% if logged_in %}
-                    <li><a href="#">Spaces</a></li>
+                    <li><a href="/spaces">Spaces</a></li>
                     <li class="pipe">|</li>
-                    <li><a href="#">Requests</a></li>
+                    <li><a href="/requests">Requests</a></li>
                     <li class="pipe">|</li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
@@ -46,7 +46,7 @@ width: 10px;
 
 
 <div class="book-a-space-form">
-    <form action="/spaces/new" method="post">
+    <form action="/spaces/new" method="get">
         <input type="submit" id="submit_space" value="List a Space">
     </form>
 
@@ -55,12 +55,12 @@ width: 10px;
         
             <label for="available-from">
             <h5>Available from (DD/MM/YY)</h5>
-            <input type="text" id="available-from" name="available-from" required>
+            <input type="date" id="available-from" name="available-from" required>
             </label>
             
         <label for="available-to">
         <h5>Available to (DD/MM/YY)</h5>
-            <input type="text" id="available-to" name="available-to" required>
+            <input type="date" id="available-to" name="available-to" required>
         </label>
         
             <input type="submit" id="submit" value="List Spaces">
