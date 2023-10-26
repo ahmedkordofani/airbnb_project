@@ -13,9 +13,9 @@
         <nav>
             <ul>
                 {% if logged_in %}
-                    <li><a href="#">Spaces</a></li>
+                    <li><a href="/spaces">Spaces</a></li>
                     <li class="pipe">|</li>
-                    <li><a href="#">Requests</a></li>
+                    <li><a href="/requests">Requests</a></li>
                     <li class="pipe">|</li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
@@ -52,10 +52,10 @@
             <input type="number" id="price" name="price" required>
 
             <label for="available-from">Available From (DD/MM/YYYY):</label>
-            <input type="text" id="available-from" name="available-from" required>
+            <input type="date" id="available-from" name="available-from" required>
 
             <label for="available-to">Available To (DD/MM/YYYY):</label>
-            <input type="text" id="available-to" name="available-to" required>
+            <input type="date" id="available-to" name="available-to" required>
 
             <input type="submit" id="submit-listing" value="List My Space">
         </form>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Space</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/static/images/download.png" alt="BNB logo">
+        </div>
+        <nav>
+            <ul>
+                {% if logged_in %}
+                    <li><a href="/spaces">Spaces</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/requests">Requests</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/signup">Sign up</a></li>
+                    <li class="pipe">|</li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <!-------------------------------TITLES--------------------------------------->
+<div class="titles">
+    <h1>Requests</h1>
+
+<h4>Discover Tranquil Retreats: Your Perfect Getaway Awaits at Our Cozy B&B Rooms</h4>
+
+</div>
+
+<!-----------------------CONTAINERS----------------->
+
+<div class="comments">
+    <h3>Requests I've made</h3>
+    <h3>Requests I've received</h3>
+</div>
+
+
+<div class="main-container-request">
+    
+    <div class="container">
+        <a class="sub-container-request" href="">
+            <div class="text">
+            <h3>Cozy Cabin</h3>
+            <p>Experience the charm of a rustic cabin nestled in the woods.</p>
+            </div>
+            <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+        </a>
+    </div>
+
+    
+<div class="container"> 
+    <a class="sub-container-request" href="">
+        <div class="text">
+        <h3>Beachfront Villa</h3>
+        <p>Relax in a luxurious beachfront villa with stunning ocean views.</p>
+        </div>
+        <img class="arrow" src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
+</a>
+</div>
+
+
+    
+</div>
+
+</body>
+</html>
+
