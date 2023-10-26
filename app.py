@@ -41,10 +41,13 @@ create_db_tables()
 #   ; open http://localhost:5000/index
 
 
-@app.route('/', methods=['GET'])
+@app.route('/index', methods=['GET'])
 def get_index():
     return render_template('index.html')
 
+@app.route('/', methods=['GET'])
+def get_index_redirect():
+    return redirect("/login")
 
 @app.route('/signup', methods=['GET'])
 def get_signup_form():
