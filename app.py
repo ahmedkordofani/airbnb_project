@@ -203,7 +203,7 @@ def list_requests():
         booked_spaces = Booking.select().where(Booking.user == session['user_id'])
 
 
-        #return render_template('requests.html', booked_spaces=booked_spaces, requests=requests, logged_in=True if 'user_id' in session else False)
+        return render_template('requests.html', booked_spaces=booked_spaces, requests=requests, logged_in=True if 'user_id' in session else False)
 
 @app.route('/requests/<int:booking_id>', methods=['GET'])
 def get_request_details(booking_id):
@@ -221,7 +221,7 @@ def get_request_details(booking_id):
 
     other_bookings = Booking.select().where(Booking.start_date == booking.start_date, Booking.id != booking.id)
     
-    # return render template for request details
+    return render_template('request_for.html', booking=booking, other_bookings=other_bookings, logged_in=True if 'user_id' in session else False)
 
 @app.route('/requests/<int:booking_id>/confirm', methods=['POST'])
 def confirm_booking_request(booking_id):
