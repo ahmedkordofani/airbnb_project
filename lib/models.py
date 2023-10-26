@@ -91,6 +91,14 @@ class Booking(peewee.Model):
     class Meta:
         database = db
         table_name = 'bookings'
+    
+    def cancel_other_bookings(conf_booking):
+        bookings = Booking.select().where(Booking.start_date == conf_booking.start_date)
+        try:
+            for booking in bookings:
+                Booking.delete_by_id(booking.id)
+        except:
+            pass
 
 
 # create tables
