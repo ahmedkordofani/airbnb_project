@@ -71,10 +71,10 @@ width: 10px;
 <!-----------------------BUTTONS--------------------->
     <div class="buttons_CD main-container-request-for" >
         <form action="/requests/{{ booking.id }}/confirm" method="POST">
-            <input type="submit" id="submit" value="Confirm Request from: {{ booking.user.email }}">
+            <input type="submit" id="submit" value="Confirm Request">
         </form>
         <form action="/requests/{{ booking.id }}/decline" method="POST">
-            <input type="submit" id="submit" value="Deny Request from: {{ booking.user.email }}">
+            <input type="submit" id="submit" value="Deny Request">
         </form>
     </div>
 
