@@ -143,7 +143,7 @@ def list_spaces():
     if 'user_id' not in session:
         return redirect("/login")
 
-    spaces = Listing.get_all()
+    spaces = sorted(Listing.get_all(), key=lambda x: x.start_date)
 
     return render_template('bookaspace.html', spaces=spaces, logged_in=True if 'user_id' in session else False)
 
@@ -161,10 +161,10 @@ def list_search_spaces():
     errors = vd.validate_listing_search(start_date, end_date)
 
     if not errors:
-        spaces = Listing.get_by_date(start_date, end_date)
+        spaces = sorted(Listing.get_by_date(start_date, end_date), key=lambda x: x.start_date)
         return render_template('bookaspace.html', spaces=spaces, logged_in=True if 'user_id' in session else False)
     else:
-        spaces = Listing.get_all()
+        spaces = sorted(Listing.get_all(), key=lambda x: x.start_date)
         return render_template('bookaspace.html', errors=errors, spaces=spaces, logged_in=True if 'user_id' in session else False)
 
 @app.route('/spaces/<int:listing_id>', methods=['GET'])
