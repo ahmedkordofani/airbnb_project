@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <title>List Your Space</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <script>
-        function showPopup() {
-            alert("Your space has been listed!");
-        }
-    </script>
 </head>
 <body>
     <header>
@@ -46,7 +41,7 @@
             {% endfor %}
         {% endif %}
 
-        <form action="/spaces/new" method="post" onsubmit="showPopup()">
+        <form action="/spaces/new" method="post">
             <label for="name">Space Name:</label>
             <input type="text" id="name" name="name" required>
 
