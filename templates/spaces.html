@@ -18,7 +18,8 @@
                     selectedDate = info.startStr;
                 },
                 validRange: {
-                    start: new Date().toISOString().split("T")[0], // Start from today's date
+                    start: '{{ listing.start_date|safe }}',
+                    end: '{{ listing.end_date|safe }}', // Start from today's date
                 },
             });
             calendar.render();
