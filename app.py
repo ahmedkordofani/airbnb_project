@@ -196,7 +196,9 @@ def create_booking(listing_id):
         email = User.select().where(User.id == listing.owner).get().email
 
         # send email
-        Thread(target=send_email, args=(email, "Booking Confirmation", "Your booking has been confirmed!")).start()
+        Thread(target=send_email, args=(email, "You have received a booking request!", 
+                                        f"You have received a booking request:\n\nSpace: {listing.title}\n\nDate: {date.strftime('%Y-%m-%d')}\n\nPlease login to your account to approve or decline the request.")
+                                        ).start()
 
         return redirect("/spaces")
 
