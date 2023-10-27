@@ -563,11 +563,12 @@ a.sub-container-request-for {
 
 /* Style for the calendar container */
 #calendar {
+    width: 500px; /* Set a specific width */
+    height: 500px; /* Set a specific height */
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
     margin: 0 auto; /* Center the container horizontally */
     margin-bottom: 20px;
     padding: 20px;
