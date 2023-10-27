@@ -132,7 +132,8 @@ def create_listing():
                 end_date=end_date,
                 owner=session['user_id']
                 )
-            return redirect("/spaces")
+            new_id = Listing.select().order_by(Listing.id.desc()).get().id
+            return redirect(f"/spaces/{new_id}")
         else:
             return render_template('listaspace.html', errors=errors, logged_in=True if 'user_id' in session else False)
 
