@@ -55,6 +55,11 @@
                     <div class="text">
                     <h3>{{ booking.listing.title }}</h3>
                     <p>{{ booking.listing.description[:100] }}</p>
+                    {% if booking.approved %}
+                        <p style="color: green;">Approved</p>
+                    {% else %}
+                        <p style="color: orange;">Pending</p>
+                    {% endif %}
                     </div>
                     <img src="/static/images/476325_arrow_circle_next_right_arrows_icon (1).png" alt="">
                 </a>
