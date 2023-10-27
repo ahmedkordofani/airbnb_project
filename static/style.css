@@ -212,20 +212,38 @@ p {
 
 /**************************BOOK_A_SPACE-FORM-SECTION*******************************/
 
-
+.main-container-listing {
+    margin: 0 auto 0 auto;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center the content both horizontally and vertically */
+    max-width: 70%;
+}
 .book-a-space-form {
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
     background: #ffffff;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 10%;
+    margin: 0% 0;
     text-align: center; /* Center the content */
     display: flex;
     flex-direction: column; /* Stack elements in a column */
     align-items: center; /* Center horizontally */
+}
+.columns-req {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: azure;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 30px 0 30px 0;
+
 }
 
 
@@ -235,6 +253,7 @@ p {
     justify-content: space-between; /* Distribute elements evenly */
     align-items: center; /* Center vertically */
     margin-bottom: 10px;
+    
 }
 
 .inline-inputs input {
@@ -244,9 +263,10 @@ p {
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 16px;
-    margin-right: 100px; /* Add margin to separate the inputs */
+    margin-right: 2rem; /* Add margin to separate the inputs */
     margin-bottom: 10px;
 }
+
 
 
 
@@ -259,7 +279,10 @@ p {
     font-size: 12px;
     cursor: pointer;
     margin-bottom: 130px;/* Add margin to push it down from the top */
-    
+    width: 300px;
+    height: 50px;
+    font-size: large;
+
 }
 
 #submit {
@@ -271,14 +294,20 @@ p {
     font-size: 12px;
     cursor: pointer;
     margin-top: 15px; /* Add margin to push it down from the top */
+    height: 40px;
+    width: 260px;
 }
 
 #submit_space:hover {
     background: #e2494f;
 }
 
+#submit:hover {
+    background: #e2494f; 
+}
+
 h5 {
-    margin-right: 100px;
+    margin-right: 2rem;
     
     
 }
@@ -295,7 +324,7 @@ body {
     display: flex;
     flex-direction: column; /* Stack sub-containers vertically */
     align-items: center; /* Center horizontally */
-    margin: 30px;
+    
     
 }
 
@@ -305,9 +334,11 @@ body {
     display: flex;
     justify-content: center ; /* Center the content horizontally */
     align-items:self-start ; /* Center the content vertically */
-    min-height: 150px;
+    
     margin: 10px;
-    width: 70%;
+    min-width: 100%;
+
+    
 
 }
 
@@ -322,7 +353,7 @@ body {
     display: flex;
     justify-content: space-around;
     text-decoration: none;
-    margin: 60px 10px; /* Add margin to create space between containers */
+    margin: 30px 10px; /* Add margin to create space between containers */
 }
 
 a.sub-container-bookspace {
@@ -416,7 +447,13 @@ p {
     display: flex;
     margin: 10px 30px;
     margin-bottom: 30px;
-    justify-content: space-around; /* Adds space around the containers */
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+   /* justify-content: space-around; /* Adds space around the containers */
+    /*flex-direction: column;
+    /*align-items: center;*/
+
 }
 
 .sub-container-request {
@@ -430,17 +467,21 @@ p {
     display: flex;
     justify-content: space-around;
     text-decoration: none;
-    margin: 60px 10px; /* Add margin to create space between containers */
+    margin: 30px 10px 30px; /* Add margin to create space between containers */
 }
 
 
-.container {
-    background-color: azure;
+.container-try {
+    /*flex: 0 0 calc(40% - 10px);*/
+    
     display: flex;
+    
     justify-content: center ; /* Center the content horizontally */
-    align-items:self-start ; /* Center the content vertically */
-    min-height: 500px;
-    margin: 20px ;
+     /* Center the content vertically */
+    min-height: 0px;
+    margin: 10px;
+    min-width: 400px;
+    
 }
 
 .comments {
@@ -449,6 +490,17 @@ p {
     margin-bottom: 0px;
     margin-top: 100px;
     
+}
+
+.columns {
+    min-width: 450px;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: azure;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 0 auto 0 auto;
+
 }
 
 .text {
@@ -479,6 +531,7 @@ a.sub-container-request {
     align-items: center; /* Center the content both horizontally and vertically */
 }
 
+
 .sub-container-request-for {
     background-color: #fff;
     border: 1px solid #e1e1e1;
@@ -494,20 +547,21 @@ a.sub-container-request {
 }
 
 
+
 .container {
     background-color: azure;
     display: flex;
-    justify-content: center ; /* Center the content horizontally */
-    align-items:self-start ; /* Center the content vertically */
+    justify-content: center ; 
+    align-items:self-start ; 
     min-height: 300px;
-    margin: 20px ;
+    margin: 10px ;
 }
 
 .comments {
     display: flex;
     justify-content:space-around ;
     margin-bottom: 0px;
-    margin-top: 100px;
+    margin-top: 10px;
     
 }
 
@@ -517,31 +571,31 @@ a.sub-container-request {
 
 a.sub-container-request-for {
     display: flex;
-    justify-content: space-between; /* To separate the text and the image */
-    align-items: center; /* To vertically center the content */
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 .arrow {
-    width: 50px; /* Set the width to your desired size (e.g., 50px for smaller) */
-    height: auto; /* Maintain the aspect ratio */
+    width: 50px; 
+    height: auto; 
 }
-
 .buttons_CD input {
     background: #ff5a5f;
-    color: #fff;
+    color: #333;
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
     font-size: 12px;
     cursor: pointer;
-    margin-bottom: 13px;/* Add margin to push it down from the top */
+    margin-bottom: 13px;
     width: 515px;
     height: 30px;
     display: block
 }
 
 .buttons_CD {
-    margin-bottom: 60px;
+    margin-bottom: 60%;
+    color: #333;
 }
 
 /**************************SPACES-FORM-SECTION*******************************/

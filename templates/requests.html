@@ -42,14 +42,15 @@
 <div class="comments">
     <h3>Requests I've made</h3>
     <h3>Requests I've received</h3>
+    <!--<h3>Requests I've made</h3>-->
 </div>
 
 
 <div class="main-container-request">
-
+<div class="columns">
     {% if booked_spaces %}
         {% for booking in booked_spaces %}
-            <div class="container">
+            <div class="container-try">
                 <a class="sub-container-request" href="/spaces/{{ booking.listing.id }}">
                     <div class="text">
                     <h3>{{ booking.listing.title }}</h3>
@@ -60,7 +61,8 @@
             </div>
         {% endfor %}
     {% endif %}
-
+</div>
+<div class="columns">
     {% if requests %}
         {% for request in requests %} 
             <div class="container"> 
@@ -74,10 +76,43 @@
             </div>
         {% endfor %}
     {% endif %}
-
+</div>
 
     
 </div>
+
+<!---
+<table>
+    <thead>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Data 1A</td>
+        <td>Data 1B</td>
+      </tr>
+      <tr>
+        <td>Data 2A</td>
+        <td>Data 2B</td>
+      </tr>
+      <tr>
+        <td>Data 3A</td>
+        <td>Data 3B</td>
+      </tr>
+    </tbody>
+  </table>
+
+-->
+
+
+
+
+
+
+
 
 </body>
 </html>

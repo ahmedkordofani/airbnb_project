@@ -35,7 +35,7 @@ width: 10px;
 
     <!-------------------------------TITLES--------------------------------------->
 <div class="titles">
-    <h1>Book a Spaces</h1>
+    <h1>Book a Space</h1>
 
 <h4>Discover Tranquil Retreats: Your Perfect Getaway Awaits at Our Cozy B&B Rooms</h4>
 
@@ -43,7 +43,7 @@ width: 10px;
 
 
 <!---------------------BOOK-A-SPACE-FORM PART------------------------->
-
+<div class="main-container-listing">
 
 <div class="book-a-space-form">
     <form action="/spaces/new" method="get">
@@ -63,13 +63,14 @@ width: 10px;
             <input type="date" id="available-to" name="available-to" required>
         </label>
         
-            <input type="submit" id="submit" value="List Spaces">
+            <input type="submit" id="submit" value="Filter">
         </div>
     </form>
 </div>  
 
 
 <!--------------CONTAINERS-------------------------------->
+<div class="columns-req">
 {% if spaces %}
     {% for space in spaces %}
         <div class="main-container listing">
@@ -85,5 +86,7 @@ width: 10px;
         </div>
     {% endfor %}
 {% endif %}
+</div>
+</div>
 </body>
 </html>

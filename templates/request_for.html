@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Book a Space</title>
+    <title>Request for</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
@@ -69,7 +69,7 @@ width: 10px;
 
 
 <!-----------------------BUTTONS--------------------->
-    <div class="buttons_CD">
+    <div class="buttons_CD main-container-request-for" >
         <form action="/requests/{{ booking.id }}/confirm" method="POST">
             <input type="submit" id="submit" value="Confirm Request from: {{ booking.user.email }}">
         </form>
@@ -77,3 +77,7 @@ width: 10px;
             <input type="submit" id="submit" value="Deny Request from: {{ booking.user.email }}">
         </form>
     </div>
+
+
+        
+    </body>
