@@ -1,33 +1,39 @@
-# MakersBnB Python Project Seed
+# Module 6: Engineering Project (Makersbnb)
 
-This repo contains the seed codebase for the MakersBnB project in Python (using 
-Flask and Pytest).
+In Module 6 of the Makers course, I had the opportunity to work as part of a team on the "Makersbnb" project, a web application that allowed me to apply and further develop my engineering skills and collaborate effectively within a team. Here are the key achievements and experiences from this module, particularly focusing on the Airbnb project:
 
-Someone in your team should fork this seed repo to their Github account. 
-Everyone in the team should then clone this fork to their local machine to work on it.
+## Effective Team Collaboration
 
-## Setup
+- **Teamwork and Communication:** I learned how to work and communicate effectively as part of a team, collaborating with three other team members to build the Makersbnb web application. This experience enhanced my ability to share ideas, information, and feedback within a team setting.
 
-```shell
+- **Task Breakdown and Assignment:** We successfully broke down the project into tasks and assigned them to pairs, ensuring that each team member had a specific role and responsibility. This approach allowed us to work efficiently and meet our project goals.
 
-# Install dependencies and set up the virtual environment
-; pipenv install
+## Agile Project Management
 
-# Activate the virtual environment
-; pipenv shell
+- **Agile Ceremonies:** We implemented agile ceremonies to organize our work and improve our processes. Daily stand-up meetings and retrospectives were essential for tracking our progress, identifying challenges, and making continuous improvements to our workflow.
 
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
+- **Trello Board:** We created a Trello board to visualize our development workflow and track the progress of our tasks. This board included columns such as "Backlog (All TODO)," "Current Sprint," "In Progress," "In Review," and "Done," which allowed us to manage our tasks effectively.
 
-# Create a test and development database
-; createdb airbnb-dev
+## Developer Workflow
 
-# Run the tests (with extra logging)
-; pipenv run pytest -x
+- **Planning and Implementation:** We followed a developer workflow to plan, implement, and peer-review features. This workflow ensured that we maintained a systematic approach to feature development, from ideation to testing and deployment.
 
-# Run the app
-; pipenv run python3 app.py
+- **Minimum Viable Product (MVP):** We focused on building an MVP that implemented the core features of the Makersbnb project. This approach allowed us to deliver a functional product quickly, enabling us to gather feedback and iterate on our project effectively.
 
-# Now visit http://localhost:5000/index in your browser
-```
+## User Stories and Tasks
+
+- **User Story Breakdown:** We broke down user stories into smaller, manageable tasks, ensuring that each task was achievable in less than half a day. This approach allowed us to work on individual components of the project without overwhelming ourselves.
+
+- **Acceptance Criteria and Testing:** We defined clear acceptance criteria for each task, specifying what would constitute the completion of that feature. This included considering testing requirements, ensuring that each feature was thoroughly tested.
+
+## Challenges and Learnings
+
+- **Effective Work Habits:** We learned the importance of maintaining a healthy work-life balance and not overexerting ourselves. Regular breaks and pair rotations helped us stay focused and refreshed.
+
+- **Ensuring Everyone's Voice Is Heard:** It was crucial to create an inclusive environment where every team member's voice was heard and valued. This allowed us to consider diverse perspectives and ensure that everyone contributed to the project.
+
+## Web Development Tools and Guidance
+
+- We leveraged the guidance and tools provided in the web development materials to implement common web application patterns, such as user sign-up and login, loading static files (CSS, images, etc.), and other essential functionalities.
+
+The Makersbnb project in Module 6 was a valuable experience that allowed me to apply my technical knowledge, collaborate effectively within a team, and follow agile development practices. This project not only enhanced my coding skills but also sharpened my project management and teamwork abilities, preparing me for real-world software engineering projects.
